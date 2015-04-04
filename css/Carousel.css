@@ -1,0 +1,53 @@
+﻿body
+{
+    margin:0;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+	font-size: 13px;
+	line-height: 150%;
+	color: #454545;
+}
+h2
+{
+	color:#16509d;
+}
+h3, h3 > a
+{
+	color:#2063af;
+}
+div.foo > div
+{
+    width:662px;
+    height:335px;
+    overflow:hidden;
+    display:inline-block;
+}
+div.foo > input 
+{
+    display:inline;
+}
+div.foo > div > div > div
+{
+    width:720px;
+    height:335px;
+    display:inline;
+    overflow:hidden;
+    float:left;
+    --background:url('../images/CarouselDelivery.png') no-repeat;
+}
+div.foo > div > div > div > h1
+{
+	color:#5500b4;
+	font-style:italic;
+	padding-left:20px;
+}
+div.foo > div > div > div > ul > li
+{
+	font-size:13pt;
+	--font-style:italic;
+	max-width:400px;
+	line-height:170%;
+}
+div.teaser
+{
+    float:left;
+}

@@ -1,0 +1,112 @@
+﻿div.offer, div.shopoffer
+{
+    width:234px;
+    padding:0px;
+    float:left;
+}
+div.sidemodule > div.offer, div.sidemodule > div.shopoffer
+{
+    float:none;
+}
+div.offer > div, div.shopoffer > div
+{
+    width:134px;
+    height:150px;
+    float:left;
+    text-align:center;
+}
+div.offer > h3, div.shopoffer > h3
+{
+    text-align:center;
+    height:38px;
+}
+div.offer > div > img, div.shopoffer > div > img, div.offer > div > a > img, div.shopoffer > div > a > img
+{
+    max-width:134px;
+    max-height:150px;
+}
+div.offer > div + div, div.shopoffer > div + div
+{
+    width:75px;
+    height:150px;
+}
+div.offer > div + div > img
+{
+    max-width:75px;
+    max-height:75px;
+}
+div.offer > a, div#dsp > a
+{
+    color: #454545;
+    margin-left: 35px;
+}
+div#dsp > a
+{
+    margin-left: 20px;
+}
+div.offer > a + a, div#dsp > a + a
+{
+    font-size:larger;
+    font-weight:bold;
+    color:Red;
+}
+div.shopoffer > a
+{
+	color:Red;
+	font-size:18px;
+	font-weight:bold;
+	padding-left: 83px;
+}
+h3, h3 > a
+{
+	color:#2063af;
+}
+body
+{
+	font-family: Verdana, Helvetica, Arial, sans-serif;
+	font-size: 13px;
+	line-height: 150%;
+	color: #454545;
+}
+div.sidemodule > a, div.sidemodule > a 
+{
+	--font-size:larger;
+	font-weight:bold;
+	position:relative;
+	left:20px;
+	top:-5px;
+	color:#2063af;
+}
+table.DailySpecial
+{
+    font-size: 16px;
+}
+table.DailySpecial > tbody > tr
+{
+    height: 50px;
+}
+span.newprice
+{
+    font-weight: bold;
+    color: #ff3300;
+}
+div.dailyspecialband, div.dailyspecialbandEE, div.dailyspecialbandEN
+{
+    position: absolute;
+    background:url('../images/dalyspecialband.png') no-repeat;
+    margin: 0;
+    height: 121px;
+    width: 121px;
+    background-position: top left; 
+    z-index: 1000;
+    top: -10px;
+    left: -10px;
+}
+div.dailyspecialbandEE
+{
+    background:url('../images/dalyspecialbandEE.png') no-repeat;
+}
+div.dailyspecialbandEN
+{
+    background:url('../images/dalyspecialbandEN.png') no-repeat;
+}

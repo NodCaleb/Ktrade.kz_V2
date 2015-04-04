@@ -1,0 +1,143 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="AdminMasterPage.master.cs" Inherits="KtradeMasterPageII" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <%--<title>Ktrade</title>--%>
+    <link rel="Stylesheet" href="css/Master.css" />
+    <link rel="stylesheet" type="text/css" href="css/superfish.css" media="screen"/>
+    <!--Это скрипты для superfish меню-->
+    <script type="text/javascript" src="js/jquery-1.2.6.min.js"></script>
+    <script type="text/javascript" src="js/hoverIntent.js"></script>
+    <script type="text/javascript" src="js/superfish.js"></script>
+    <%--<script type="text/javascript" src="../js/jquery-1.2.6.min.js"></script>--%>
+    <script type="text/javascript" src="../js/jquery-1.7.js"></script>
+    <script type="text/javascript" src="../js/hoverIntent.js"></script>
+    <script type="text/javascript" src="../js/superfish.js"></script>
+    <script type="text/javascript">
+        // initialise plugins
+        jQuery(function () {
+	        jQuery('ul.sf-menu').superfish();
+        });
+    </script>
+    <link rel="shortcut icon" href="images/favicon2.ico" />
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="MasterForm" runat="server">
+    <div class="layout">
+        <div class="leftshadow">
+            <asp:Image ID="LeftShadowImage" ImageUrl="~/images/LeftShadowTransparent.png" runat="server" />
+		</div>
+		<div class="rightshadow">
+            <asp:Image ID="RightShadowImage" ImageUrl="~/images/RightShadowTransparent.png" runat="server" />
+		</div>
+        <div class="innerlayout">
+            <div class="header">
+                <asp:HyperLink ID="HomeLink" NavigateUrl="~" runat="server"><asp:Image ID="KtradeLogo" ImageUrl="~/images/KtradeLogo.png" runat="server" /></asp:HyperLink>                
+                <div class="login">
+                    <asp:MultiView ID="LoginMultiView" ActiveViewIndex="0" runat="server">
+                        <asp:View ID="Anonimous" runat="server">
+                            <asp:TextBox ID="UserNameTextBox" runat="server" placeholder="имя"></asp:TextBox>
+					        <asp:TextBox ID="PasswordTextBox" runat="server" TextMode="Password" placeholder="пароль"></asp:TextBox>
+                            <div><asp:ImageButton ID="LoginImageButton" runat="server" ImageUrl="~/Images/Unlock.png" ToolTip="Вход" onclick="LoginImageButton_Click" /></div>
+					        <div title="Запомнить меня"><asp:Image ID="RememberImage" ImageUrl="~/images/Remember.png" runat="server" /><asp:CheckBox ID="RememberMe" runat="server" /></div>
+					        <div><asp:HyperLink ID="RegisterLink" NavigateUrl="~/Customer/Register.aspx" runat="server"><asp:Image ID="RegisterImage" ImageUrl="~/Images/Register.png" ToolTip="Регистрация нового покупателя" runat="server" /></asp:HyperLink></div>
+                        </asp:View>
+                        <asp:View ID="Authorised" runat="server">
+                            <div class="greetings"><asp:Label ID="UserFullNameDisplay" runat="server" Text="Юзер"></asp:Label></div>
+			                <div><asp:ImageButton ID="LogoutImageButton" runat="server" ImageUrl="~/Images/Lock.png" onclick="LogoutImageButton_Click" ToolTip="Выход" /></div>
+			                <div><asp:HyperLink ID="ChangePasswordLink" NavigateUrl="~/Customer/ChangePassword.aspx" runat="server"><asp:Image ID="ChangePasswordImage" ImageUrl="~/Images/Key.png" runat="server" ToolTip="Сменить пароль" /></asp:HyperLink></div>
+                        </asp:View>
+                    </asp:MultiView>
+                </div>
+                <div class="contacts">
+                    <p>8 (7212) 41-90-61</p>
+                    <p><asp:HyperLink ID="MailLink" runat="server" NavigateUrl="mailto:sale@ktrade.kz">sale@ktrade.kz</asp:HyperLink></p>
+                    <p>Skype: ktrade.kz</p>
+                    <%--<p>г. Караганда, ул. Кривогуза, 5, офис 311</p>--%>
+                </div>
+			</div>
+
+            <div class="contentlayout">
+                <div class="menue">
+				    <ul class="sf-menu">
+                        <li>
+						    <asp:HyperLink ID="DummyLink01" runat="server" NavigateUrl="#">Контент</asp:HyperLink>
+						    <ul>
+                                <li>
+							        <asp:HyperLink ID="HyperLink9" runat="server" NavigateUrl="~/Admin/NewsManagement.aspx">Новости</asp:HyperLink>
+						        </li>
+                                <li>
+							        <asp:HyperLink ID="HyperLink10" runat="server" NavigateUrl="~/Admin/DiscountManagement.aspx">Скидки</asp:HyperLink>
+						        </li>
+                                <li>
+							        <asp:HyperLink ID="HyperLink12" runat="server" NavigateUrl="~/Admin/UpsellManagement.aspx">Горячие предложения</asp:HyperLink>
+						        </li>
+				<li>
+							        <asp:HyperLink ID="HyperLink13" runat="server" NavigateUrl="~/Admin/DailySpecialsManagement.aspx">Товары дня</asp:HyperLink>
+						        </li>
+                            </ul>
+                        </li>
+                        <li>
+						    <asp:HyperLink ID="DummyLink02" runat="server" NavigateUrl="#">Каталоги</asp:HyperLink>
+						    <ul>
+                                <li>
+							        <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/Admin/CatalogueDictionary.aspx">Электронные</asp:HyperLink>
+						        </li>
+                                <li>
+							        <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Admin/EmbeddedDictionary.aspx">Вклееные</asp:HyperLink>
+						        </li>
+                            </ul>
+                        </li>
+                        <li>
+						    <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="#">Коммерция</asp:HyperLink>
+						    <ul>
+                                <li>
+                                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Admin/OrderManagement.aspx">Заказы</asp:HyperLink>
+				</li>
+			
+				<li>
+					<asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/Admin/CustomerManagement.aspx">Покупатели</asp:HyperLink>
+				</li>
+                                <li>
+				      <asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="~/Admin/ImportData.aspx">Импорт данных</asp:HyperLink>
+				</li>
+				<li>
+					<asp:HyperLink ID="QiwiLink" runat="server" NavigateUrl="~/Admin/QiwiPayments.aspx">Платежи Qiwi</asp:HyperLink>
+				</li>
+				<li>
+					<asp:HyperLink ID="ZLogLink" runat="server" NavigateUrl="~/Admin/ZPaymentsLog.aspx">Платежи Z-Payments</asp:HyperLink>
+				</li>
+				<li>
+					<asp:HyperLink ID="WLogLink" runat="server" NavigateUrl="~/Admin/WooppayPaymentsLog.aspx">Платежи Wooppay</asp:HyperLink>
+				</li>
+				<li>
+					<asp:HyperLink ID="ELogLink" runat="server" NavigateUrl="~/Admin/EcomPaymentsLog.aspx">Платежи EcomCharge</asp:HyperLink>
+				</li>
+                            </ul>
+                        </li>
+                        
+                        					    
+			    </div>
+                <div class="content">
+                    <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">        
+                    </asp:ContentPlaceHolder>
+                    <div style="clear:both;"></div>
+                </div>				
+            </div>			
+        </div>
+		<%--<div class="bottomblock">
+			<asp:Image ID="BottomBlockImage" ImageUrl="~/images/Elka.png" runat="server" />
+		</div>--%>
+    </div>	
+    <div class="cellar">
+			
+	</div>
+    </form>
+</body>
+</html>

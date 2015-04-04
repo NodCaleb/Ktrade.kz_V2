@@ -1,0 +1,351 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="KtradeMasterPage.master.cs" Inherits="KtradeMasterPageII" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <title>Ktrade - заказ товаров по каталогам</title>
+    <link rel="Stylesheet" href="css/Master.css" />
+    <link rel="stylesheet" type="text/css" href="css/superfish.css" media="screen"/>
+    <!--Это скрипты для superfish меню-->
+    <script type="text/javascript" src="js/jquery-1.2.6.min.js"></script>
+    <script type="text/javascript" src="js/hoverIntent.js"></script>
+    <script type="text/javascript" src="js/superfish.js"></script>
+    <%--<script type="text/javascript" src="../js/jquery-1.2.6.min.js"></script>--%>
+    <script type="text/javascript" src="../js/jquery-1.7.js"></script>
+    <script type="text/javascript" src="../js/hoverIntent.js"></script>
+    <script type="text/javascript" src="../js/superfish.js"></script>
+    <script type="text/javascript">
+        // initialise plugins
+        jQuery(function () {
+	        jQuery('ul.sf-menu').superfish();
+        });
+    </script>
+    <!--Это скрипт Google analytics-->
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-27249274-1']);
+        _gaq.push(['_trackPageview']);
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <!--Это скрипт для Google+-->
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("a#showxratestable").click(function (event) {
+                event.preventDefault();
+                $("div#xratetable").show("slow");
+                $(this).hide("slow");
+            });
+        });
+    </script>
+    <!--Это скрипт для Вконтакте-->
+    <script src="http://vkontakte.ru/js/api/openapi.js" type="text/javascript" charset="windows-1251"></script>
+    <script type="text/javascript" src="http://userapi.com/js/api/openapi.js?48"></script>
+    <%--<script type="text/javascript">
+        VK.init({
+            apiId: 2825852,
+            onlyWidgets: true
+        });
+    </script>--%>
+    
+    <meta name="description" content="Мы предоставляем услуги доставки товаров по каталогам - OTTO, H&M, Lacoste, ZARA, MEXX, Amazon и других - из Германии. Вашему вниманию предлагаются более 130 европейских каталогов одежды онлайн с огромным ассортиментом товаров на любой вкус для людей разного возраста." />
+
+    <link rel="shortcut icon" href="images/favicon2.ico" />
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <!--Это скрипт для facebook-->
+    <div id="fb-root"></div>
+    <script type="text/javascript">    (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=341484919233104";
+            fjs.parentNode.insertBefore(js, fjs);
+        } (document, 'script', 'facebook-jssdk'));
+    </script>
+    <!--Это опять скрипт для Вконтакте-->
+    <script type="text/javascript">
+        VK.init({
+            apiId: 2825852,
+            onlyWidgets: true
+        });
+    </script>    
+    <form id="MasterForm" runat="server">
+    <div class="layout">
+    	<%-- div class="banner">
+    		<iframe frameborder="0" scrolling="no" width="160px" height="600px" src="http://ktrade.kz/Banners.html"></iframe>
+    	</div --%>
+        <div class="leftshadow">
+            <asp:Image ID="LeftShadowImage" alt="LeftShadow" ImageUrl="~/images/LeftShadowTransparent.png" runat="server" />
+		</div>
+		<div class="rightshadow">
+            <asp:Image ID="RightShadowImage" alt="RightShadow" ImageUrl="~/images/RightShadowTransparent.png" runat="server" />
+		</div>
+        <div class="innerlayout">
+            <div class="header">
+                <asp:HyperLink ID="HomeLink" NavigateUrl="~" runat="server"><asp:Image ID="KtradeLogo" ImageUrl="~/images/KtradeLogo.png" runat="server" alt="Logo" /></asp:HyperLink>                
+                <div class="login">
+                    <asp:MultiView ID="LoginMultiView" ActiveViewIndex="0" runat="server">
+                        <asp:View ID="Anonimous" runat="server">
+                            <asp:TextBox ID="UserNameTextBox" runat="server" placeholder="имя"></asp:TextBox>
+					        <asp:TextBox ID="PasswordTextBox" runat="server" TextMode="Password" placeholder="пароль"></asp:TextBox>
+                            <div><asp:ImageButton ID="LoginImageButton" runat="server" ImageUrl="~/Images/Unlock.png" ToolTip="Вход" onclick="LoginImageButton_Click" /></div>
+					        <div title="Запомнить меня"><asp:Image ID="RememberImage" ImageUrl="~/images/Remember.png" runat="server" /><asp:CheckBox ID="RememberMe" runat="server" /></div>
+					        <div><asp:HyperLink ID="RegisterLink" NavigateUrl="~/Customer/Register.aspx" runat="server"><asp:Image ID="RegisterImage" ImageUrl="~/Images/Register.png" ToolTip="Регистрация нового покупателя" runat="server" /></asp:HyperLink></div>
+                        </asp:View>
+                        <asp:View ID="Authorised" runat="server">
+                            <div class="greetings"><asp:Label ID="UserFullNameDisplay" runat="server" Text="Юзер"></asp:Label></div>
+			                <div><asp:ImageButton ID="LogoutImageButton" runat="server" ImageUrl="~/Images/Lock.png" onclick="LogoutImageButton_Click" ToolTip="Выход" /></div>
+			                <div><asp:HyperLink ID="ChangePasswordLink" NavigateUrl="~/Customer/ChangePassword.aspx" runat="server"><asp:Image ID="ChangePasswordImage" ImageUrl="~/Images/Key.png" runat="server" ToolTip="Сменить пароль" /></asp:HyperLink></div>
+                        </asp:View>
+                    </asp:MultiView>
+                </div>
+                <div class="contacts">
+                    <p>8 (7212) 41-90-61</p>
+                    <p><asp:HyperLink ID="MailLink" runat="server" NavigateUrl="mailto:sale@ktrade.kz">sale@ktrade.kz</asp:HyperLink></p>
+                    <p>Skype: ktrade.kz</p>
+                    <%--<p>г. Караганда, ул. Кривогуза, 5, офис 311</p>--%>
+                </div>
+                <%--div class="award">
+                	<a href="http://award.kz/catalog/show/id/541" target="_blanc"><asp:Image runat="server" id="BlankLink" ImageUrl="~/images/buttons/Blanc.png" /></a>
+                </div--%>
+			</div>
+
+            <div class="contentlayout">
+                <div class="menue">
+		    <ul class="sf-menu">
+			<li><asp:HyperLink ID="DummyLink01" runat="server" NavigateUrl="#">Ktrade</asp:HyperLink>
+			    <ul>
+				<li><asp:HyperLink ID="NewsLink" runat="server" NavigateUrl="~/News.aspx">Новости</asp:HyperLink></li>
+				<li><asp:HyperLink ID="DiscountsLink" runat="server" NavigateUrl="~/Discount.aspx">Скидки</asp:HyperLink></li>
+				<li><asp:HyperLink ID="AboutLink" runat="server" NavigateUrl="~/About.aspx">О нас</asp:HyperLink></li>
+                                <li><asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Crew.aspx">Наша команда</asp:HyperLink></li>
+                                <li><asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/Testimonials.aspx">Отзывы клиентов</asp:HyperLink></li>
+                                <li><asp:HyperLink ID="ContactsLink" runat="server" NavigateUrl="~/Contacts.aspx">Контакты</asp:HyperLink></li>
+			    </ul>
+			</li>
+			<li><asp:HyperLink ID="DummyLink02" runat="server" NavigateUrl="#">Каталоги</asp:HyperLink>
+			    <ul>
+				<li><asp:HyperLink ID="WebCataloguesMainLink" runat="server" NavigateUrl="~/Catalogues.aspx">Электронные</asp:HyperLink>
+				    <ul>
+					<li><asp:HyperLink ID="WebCataloguesAllesLink" runat="server" NavigateUrl="~/Catalogues.aspx?Tag=active">Все сразу</asp:HyperLink></li>
+					<li><asp:HyperLink ID="WebCataloguesMenLink" runat="server" NavigateUrl="~/Catalogues.aspx?Tag=men">Мужская одежда</asp:HyperLink></li>
+					<li><asp:HyperLink ID="WebCataloguesWomenLink" runat="server" NavigateUrl="~/Catalogues.aspx?Tag=frau">Женская одежда</asp:HyperLink></li>
+					<li><asp:HyperLink ID="WebCataloguesChildrenLink" runat="server" NavigateUrl="~/Catalogues.aspx?Tag=children">Детская одежда</asp:HyperLink></li>
+					<li><asp:HyperLink ID="WebCataloguesShoesLink" runat="server" NavigateUrl="~/Catalogues.aspx?Tag=shoes">Обувь</asp:HyperLink></li>
+					<li><asp:HyperLink ID="WebCataloguesChubbyLink" runat="server" NavigateUrl="~/Catalogues.aspx?Tag=chubby">Одежда для полных дам</asp:HyperLink></li>
+					<li><asp:HyperLink ID="WebCataloguesToysLink" runat="server" NavigateUrl="~/Catalogues.aspx?Tag=toys">Все для детей</asp:HyperLink></li>
+					<li><asp:HyperLink ID="WebCataloguesSportLink" runat="server" NavigateUrl="~/Catalogues.aspx?Tag=sport">Все для спорта</asp:HyperLink></li>
+					<li><asp:HyperLink ID="WebCataloguesHomeLink" runat="server" NavigateUrl="~/Catalogues.aspx?Tag=home">Все для дома и уюта</asp:HyperLink></li>
+					<li><asp:HyperLink ID="WebCataloguesLederLink" runat="server" NavigateUrl="~/Catalogues.aspx?Tag=leather">Кожаные изделия</asp:HyperLink></li>
+					<li><asp:HyperLink ID="WebCataloguesMakeupLink" runat="server" NavigateUrl="~/Catalogues.aspx?Tag=makeup">Косметика</asp:HyperLink></li>
+					<li><asp:HyperLink ID="WebCataloguesBedLink" runat="server" NavigateUrl="~/Catalogues.aspx?Tag=bed">Постельное белье</asp:HyperLink></li>
+					<li><asp:HyperLink ID="WebCataloguesSchmuckLink" runat="server" NavigateUrl="~/Catalogues.aspx?Tag=jems">Ювелирные украшения</asp:HyperLink></li>
+				    </ul>
+				</li>
+				<li><asp:HyperLink ID="EmbeddedCataloguesLink" runat="server" NavigateUrl="~/CataloguesEmbedded.aspx">Бумажные online</asp:HyperLink></li>
+				<li><asp:HyperLink ID="CataloguesDownloadLink" runat="server" NavigateUrl="~/CataloguesDownload.aspx">Скачать</asp:HyperLink></li>
+			    </ul>
+	    	    </li>
+		    <li><a href="#">Информация</a>
+			<ul>
+			    <li><asp:HyperLink ID="OrderMakingLink" runat="server" NavigateUrl="~/Infos/OrderMaking.aspx">Оформление заказа</asp:HyperLink></li>
+			    <li><asp:HyperLink ID="VertragLink" runat="server" NavigateUrl="~/Infos/Vertrag.aspx">Соглашение об использовании сайта</asp:HyperLink></li>
+			    <li><asp:HyperLink ID="VisaLink" runat="server" NavigateUrl="~/Infos/CardPayment.aspx">Оплата банковской картой</asp:HyperLink></li>
+			    <li><asp:HyperLink ID="QiwiPaymentLink" runat="server" NavigateUrl="~/Infos/QiwiPayment.aspx">Оплата через терминалы Qiwi</asp:HyperLink></li>
+			    <li><asp:HyperLink ID="WoopLink" runat="server" NavigateUrl="~/Infos/WoopPayment.aspx">Оплата через WoopPay</asp:HyperLink></li>
+			    <li><asp:HyperLink ID="WoerteBuchLink" runat="server" NavigateUrl="~/Infos/WoerteBuch.aspx">Словарик немецкого</asp:HyperLink></li>
+			    <li><asp:HyperLink ID="GroessenLink" runat="server" NavigateUrl="~/Infos/Groessen.aspx">Размеры одежды</asp:HyperLink></li>
+			    <li><asp:HyperLink ID="KleidungPfledgeSymboleLink" runat="server" NavigateUrl="~/Infos/KleidungPfledgeSymbole.aspx">Символы ухода за одеждой</asp:HyperLink></li>
+			    <li><asp:HyperLink ID="LieferungLink" runat="server" NavigateUrl="~/Infos/Lieferung.aspx">Доставка и возврат</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="FigureTypesLink" runat="server" NavigateUrl="~/Infos/FigureTypes.aspx">Подбор одежды по типу фигуры</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="GoodsWeightLink" runat="server" NavigateUrl="~/Infos/GoodsWeight.aspx">Примерный вес товаров</asp:HyperLink></li>
+			    <li><asp:HyperLink ID="JeansLlink" runat="server" NavigateUrl="~/Infos/JeansTypes.aspx">Виды и типы джинсов</asp:HyperLink></li>
+			    <li><asp:HyperLink ID="CookingLlink" runat="server" NavigateUrl="~/Infos/HomeCooking.aspx">Готовим дома</asp:HyperLink></li>
+			</ul>
+		    </li>                   
+    		    <li><asp:HyperLink ID="OrderLink" style="color:#FFFF66;" runat="server" NavigateUrl="~/Customer/NewOrder.aspx">Заказ online</asp:HyperLink>
+			<ul>
+			    <li><u><asp:HyperLink ID="NewOrderLink" runat="server" NavigateUrl="~/Customer/NewOrder.aspx">Оформить новый заказ</asp:HyperLink></u></li>
+			    <li><u><asp:HyperLink ID="PaymentLink" runat="server" NavigateUrl="~/Customer/PaymentOnline.aspx">Оплатить</asp:HyperLink></u></li>
+			    <li><asp:HyperLink ID="OrdersPryLink" runat="server" NavigateUrl="~/Customer/OrdersPry.aspx">Посмотреть, что заказывают другие!</asp:HyperLink></li>
+			    <li><asp:HyperLink ID="OrdersInfoLink" runat="server" NavigateUrl="~/Customer/OrdersInfo.aspx">Заказы в работе</asp:HyperLink></li>
+                            <li><asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Customer/OrdersHistory.aspx">История заказов</asp:HyperLink></li>
+			    <li><asp:HyperLink ID="PaymentHistoryLink" runat="server" NavigateUrl="~/Customer/AllPaymentsHistory.aspx">История платежей</asp:HyperLink></li>
+			</ul>
+		    </li>
+		    <li><asp:HyperLink ID="WishListLink" runat="server" NavigateUrl="~/Customer/MyWishList.aspx">Список желаний</asp:HyperLink></li>
+		    <li><asp:HyperLink ID="ForumLink" runat="server" NavigateUrl="~/Forum.aspx">Форум</asp:HyperLink></li>
+		    <li><asp:HyperLink ID="ShopLink" runat="server" NavigateUrl="http://ktrade.myinsales.ru/" target="_blank">Магазин</asp:HyperLink></li>
+		</ul>
+                <asp:Panel ID="ControlPanel" runat="server" Visible="False">
+                    <ul class="sf-menu">
+			<li><asp:HyperLink ID="HyperLink1" runat="server" Target="_blank" NavigateUrl="~/Admin/NewsManagement.aspx">Admin</asp:HyperLink>
+			    <ul>
+				<li><asp:HyperLink ID="ContentLink01" runat="server" NavigateUrl="#">Контент</asp:HyperLink>
+				    <ul>
+					<li><asp:HyperLink ID="NewsManagementLink" runat="server" NavigateUrl="~/Admin/NewsManagement.aspx">Новости</asp:HyperLink></li>
+					<li><asp:HyperLink ID="DiscountManagementLink" runat="server" NavigateUrl="~/Admin/DiscountManagement.aspx">Скидки</asp:HyperLink></li>
+					<li><asp:HyperLink ID="UpsellManagementLink" runat="server" NavigateUrl="~/Admin/UpsellManagement.aspx">Горячие предложения</asp:HyperLink></li>
+					<li><asp:HyperLink ID="DailySpecialsManagementLink" runat="server" NavigateUrl="~/Admin/DailySpecialsManagement.aspx">Товары дня</asp:HyperLink></li>
+				    </ul>
+				</li>
+		    		<li><asp:HyperLink ID="CataloguesLink02" runat="server" NavigateUrl="#">Каталоги</asp:HyperLink>
+				    <ul>
+					<li><asp:HyperLink ID="CatalogueDictionaryLink" runat="server" NavigateUrl="~/Admin/CatalogueDictionary.aspx">Электронные</asp:HyperLink></li>
+					<li><asp:HyperLink ID="EmbeddedDictionaryLink" runat="server" NavigateUrl="~/Admin/EmbeddedDictionary.aspx">Вклееные</asp:HyperLink></li>
+				    </ul>
+				</li>
+				<li><asp:HyperLink ID="CommerceLink2" runat="server" NavigateUrl="#">Коммерция</asp:HyperLink>
+				    <ul>
+					<li><asp:HyperLink ID="OrderManagementLink" runat="server" NavigateUrl="~/Admin/OrderManagement.aspx">Заказы</asp:HyperLink></li>
+					<li><asp:HyperLink ID="CustomerManagementLink" runat="server" NavigateUrl="~/Admin/CustomerManagement.aspx">Покупатели</asp:HyperLink></li>
+					<li><asp:HyperLink ID="ImportDataLink" runat="server" NavigateUrl="~/Admin/ImportData.aspx">Импорт данных</asp:HyperLink></li>
+					<li><asp:HyperLink ID="QiwiLink" runat="server" NavigateUrl="~/Admin/QiwiPayments.aspx">Платежи Qiwi</asp:HyperLink></li>
+					<li><asp:HyperLink ID="ZLogLink" runat="server" NavigateUrl="~/Admin/ZPaymentsLog.aspx">Платежи Z-Payments</asp:HyperLink></li>
+					<li><asp:HyperLink ID="WLogLink" runat="server" NavigateUrl="~/Admin/WooppayPaymentsLog.aspx">Платежи Wooppay</asp:HyperLink></li>
+					<li><asp:HyperLink ID="ELogLink" runat="server" NavigateUrl="~/Admin/EcomPaymentsLog.aspx">Платежи EcomCharge</asp:HyperLink></li>
+				    </ul>
+				</li>
+			    </ul>
+			</li>
+                    </ul>
+                </asp:Panel>
+	    </div>
+                <div class="content">
+                    <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">        
+                    </asp:ContentPlaceHolder>
+                    <div style="clear:both;"></div>
+                </div>				
+            </div>			
+        </div>
+		<%--<div class="bottomblock">
+			<asp:Image ID="BottomBlockImage" ImageUrl="~/images/Elka.png" runat="server" />
+		</div>--%>
+    </div>	
+    <div class="cellar">
+			<!-- Rating@Mail.ru counter -->
+			<script type="text/javascript">//<![CDATA[
+			var a='',js=10;try{a+=';r='+escape(document.referrer);}catch(e){}try{a+=';j='+navigator.javaEnabled();js=11;}catch(e){}
+			try{s=screen;a+=';s='+s.width+'*'+s.height;a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth);js=12;}catch(e){}
+			try{if(typeof((new Array).push('t'))==="number")js=13;}catch(e){}
+			try{document.write('<a href="http://top.mail.ru/jump?from=2183569">'+
+			'<img src="http://d1.c5.b1.a2.top.mail.ru/counter?id=2183569;t=210;js='+js+a+';rand='+Math.random()+
+			'" alt="Рейтинг@Mail.ru" style="border:0;" height="31" width="88" \/><\/a>');}catch(e){}//]]></script>
+			<noscript><p><a href="http://top.mail.ru/jump?from=2183569">
+			<img src="http://d1.c5.b1.a2.top.mail.ru/counter?js=na;id=2183569;t=210" 
+			style="border:0;" height="31" width="88" alt="Рейтинг@Mail.ru" /></a></p></noscript>
+			<!-- //Rating@Mail.ru counter -->
+			<!--Openstat-->
+			<span id="openstat2246247"></span>
+			<script type="text/javascript">
+			var openstat = { counter: 2246247, image: 5081, color: "458efc", next: openstat };
+			(function(d, t, p) {
+			var j = d.createElement(t); j.async = true; j.type = "text/javascript";
+			j.src = ("https:" == p ? "https:" : "http:") + "//openstat.net/cnt.js";
+			var s = d.getElementsByTagName(t)[0]; s.parentNode.insertBefore(j, s);
+			})(document, "script", document.location.protocol);
+			</script>
+			<!--/Openstat-->
+			<!-- Yandex.Metrika counter -->
+			<script type="text/javascript">
+			(function (d, w, c) {
+				(w[c] = w[c] || []).push(function() {
+					try {
+						w.yaCounter13344013 = new Ya.Metrika({id:13344013, enableAll: true});
+					} catch(e) {}
+				});
+				
+				var n = d.getElementsByTagName("script")[0],
+					s = d.createElement("script"),
+					f = function () { n.parentNode.insertBefore(s, n); };
+				s.type = "text/javascript";
+				s.async = true;
+				s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+				if (w.opera == "[object Opera]") {
+					d.addEventListener("DOMContentLoaded", f);
+				} else { f(); }
+			})(document, window, "yandex_metrika_callbacks");
+			</script>
+			<noscript><div><img src="//mc.yandex.ru/watch/13344013" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+			<!-- /Yandex.Metrika counter -->
+            <!--Whois.1in.Kz counter-->
+			<script language="JavaScript" type="text/javascript">
+			<!--
+			    d = document; var a = ''; a += ';r=' + escape(d.referrer);
+			    js = 10;
+			//-->
+			</script>
+			<script language="JavaScript1.1" type="text/javascript">
+			<!--
+			    a += ';j=' + navigator.javaEnabled();
+			    js = 11;
+			//-->
+			</script>
+			<script language="JavaScript1.2" type="text/javascript">
+			<!--
+			    s = screen; a += ';s=' + s.width + '*' + s.height;
+			    a += ';d=' + (s.colorDepth ? s.colorDepth : s.pixelDepth);
+			    js = 12;
+			//-->
+			</script>
+			<script language="JavaScript1.3" type="text/javascript">
+			<!--
+			    js = 13;
+			//-->
+			</script>
+			<script language="JavaScript" type="text/javascript">
+			<!--
+			    d.write('<a href="http://whois.1in.kz/jump?from=16270"' +
+			' target="_top"><img src="http://whois.1in.kz/counter' +
+			'?id=16270;t=222;js=' + js + a + ';rand=' + Math.random() +
+			'" border="0" alt="Whois.1in.kz - рейтинг лучших сайтов Казнета" title="Whois.1in.kz - рейтинг лучших сайтов Казнета" /></a>');
+			//-->
+			</script>
+			<noscript>
+			<a target="_top" href="http://whois.1in.kz/jump?from=16270">
+			<img src="http://whois.1in.kz/counter?js=na;id=16270;t=222" border="0" alt="Whois.1in.kz - рейтинг лучших сайтов Казнета" title="Whois.1in.kz - рейтинг лучших сайтов Казнета" />
+			</a>
+			</noscript>
+			<!--/Whois.1in.Kz counter-->
+			<!-- Start Z-Payment --><a href="http://www.z-payment.com" target="_blank"><img src="https://z-payment.com/images/banners/pay-88-31-4.gif" alt="Принимаем Z-Payment" border="0" /></a><!-- end Z-Payment -->
+			<!-- Wooppay --><a href="https://www.wooppay.com/?utm_source=ktrade&utm_medium=button&utm_campaign=paretner" target="_blank"><img src="http://ktrade.kz/images/wooppay_button.png" alt="Принимаем WoopPay" border="0" /></a><!-- Wooppay -->
+			<img src="http://ktrade.kz/images/cardlogo.png" alt="" />
+	</div>
+    </form>
+    <!-- script type="text/javascript">
+		var reformalOptions = {
+			project_id: 90049,
+			project_host: "ktrade.reformal.ru",
+			tab_orientation: "right",
+			tab_indent: "50%",
+			tab_bg_color: "#2063af",
+			tab_border_color: "#FFFFFF",
+			tab_image_url: "http://tab.reformal.ru/T9GC0LfRi9Cy0Ysg0Lgg0L%252FRgNC10LTQu9C%252B0LbQtdC90LjRjw==/FFFFFF/a08a7c60392f68cb33f77d4f56cf8c6f/right/1/tab.png",
+			tab_border_width: 1
+		};
+		
+		(function() {
+			var script = document.createElement('script');
+			script.type = 'text/javascript'; script.async = true;
+			script.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'media.reformal.ru/widgets/v3/reformal.js';
+			document.getElementsByTagName('head')[0].appendChild(script);
+		})();
+	</script><noscript><a href="http://reformal.ru"><img src="http://media.reformal.ru/reformal.png" /></a><a href="http://ktrade.reformal.ru">Oтзывы и предложения для Ktrade</a></noscript -->
+    <!-- BEGIN JIVOSITE CODE {literal} -->
+    <script type='text/javascript'>
+    (function(){ var widget_id = '140360';
+    var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);})();</script>
+    <!-- {/literal} END JIVOSITE CODE -->
+</body>
+</html>

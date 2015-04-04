@@ -1,0 +1,19 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SideModulesDefault.master" AutoEventWireup="true" CodeFile="Contacts.aspx.cs" Inherits="Contacts" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <title>Ktrade - контактная информация</title>
+    <link rel="Stylesheet" href="css/About.css" />
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <h2>Контактная информация:</h2>
+    <ul>
+        <li>100019, Казахстан, Караганда</li>
+        <li>ул. Кривогуза, 5, оф. 202</li>
+        <li>Телефон: 8 (7212) 41-90-61</li>
+        <li>Skype: ktrade.kz</li>
+        <li>Mail: <a id="ctl00_MailLink" href="mailto:office@ktrade.kz">office@ktrade.kz</a></li>
+    </ul>    
+    <h3>Карта:</h3>
+    <iframe width="500" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?hl=ru&amp;georestrict=input_srcid:1123e2333bb661d0&amp;ie=UTF8&amp;view=map&amp;cid=17414554160187397578&amp;q=Ktrade.kz&amp;hq=Ktrade.kz&amp;hnear=&amp;t=m&amp;vpsrc=6&amp;ll=49.813287,73.071055&amp;spn=0.006923,0.010707&amp;z=16&amp;iwloc=A&amp;output=embed"></iframe><br /><small><a href="http://maps.google.com/maps?hl=ru&amp;georestrict=input_srcid:1123e2333bb661d0&amp;ie=UTF8&amp;view=map&amp;cid=17414554160187397578&amp;q=Ktrade.kz&amp;hq=Ktrade.kz&amp;hnear=&amp;t=m&amp;vpsrc=6&amp;ll=49.813287,73.071055&amp;spn=0.006923,0.010707&amp;z=16&amp;iwloc=A&amp;source=embed" style="color:#0000FF;text-align:left">Просмотреть увеличенную карту</a></small>
+</asp:Content>
+

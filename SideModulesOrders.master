@@ -1,0 +1,133 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/KtradeMasterPage.master" AutoEventWireup="true" CodeFile="SideModulesOrders.master.cs" Inherits="SideModulesOrders" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <asp:ContentPlaceHolder id="head" runat="server">
+	</asp:ContentPlaceHolder>
+    <link rel="Stylesheet" href="../css/Offers.css" />
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <div class="sidebar">
+        <div class="sidemodule">
+			<h3>Рабочий курс</h3>
+            <asp:SqlDataSource ID="XratesSource" runat="server" ConnectionString="<%$ ConnectionStrings:KtradeConnectionString %>"
+                SelectCommand=" select
+	                                convert (varchar(10), X0.Date, 4) as Date,
+	                                X0.Xrate,
+	                                case
+		                                when X0.Xrate &gt; X1.Xrate then '~/images/Buttons/RateUp.png'
+		                                when X0.Xrate &lt; X1.Xrate then '~/images/Buttons/RateDown.png'
+		                                else '~/images/Buttons/Blanc.png'
+		                                end as ImageLink
+                                from
+	                                (select	Date, max (Xrate) as Xrate from Xrates group by Date) as X0
+                                    join (select Date, max (Xrate) as Xrate from Xrates group by Date) as X1 on DATEADD(DD, 1, X1.Date) = X0.Date
+                                where
+	                                DATEDIFF (DD, X0.Date, GETDATE()) &lt;= 15
+                                order by
+	                                X0.Date desc">
+            </asp:SqlDataSource>
+			<p><asp:Label ID="XrateLabel" runat="server" Text="000"></asp:Label><asp:Image ID="TengeSign" ImageUrl="~/images/Tenge.png" runat="server" /></p>
+            <p><a href="#" id="showxratestable">история</a></p>
+            <div id="xratetable">
+                <asp:Repeater ID="XratesRepeater" runat="server" DataSourceID="XratesSource">
+                    <HeaderTemplate>
+                        <table>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <tr><td><%# Eval("Date") %></td><td><%# Eval("Xrate") %><asp:Image ID="RateChangeImage" runat="server" ImageUrl='<%# Eval("ImageLink") %>' /></td></tr>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        </table>
+                    </FooterTemplate>
+                </asp:Repeater>
+            </div>
+		</div>
+		<div class="sidemodule">
+		    <a href="http://ktrade.myinsales.ru/" target="_blank" style="top:0; left:0;"><img src="http://ktrade.kz/images/ShopBanner.png" alt="" /></a>
+		</div>
+		<div class="sidemodule">
+			<a href="http://gowest.kz/index.php/poleznaya-informatsiya/kak-eto-voobshche-rabotaet" target="_blank" style="top:0; left:8px;"><img src="http://ktrade.kz/images/gowest-module.png" alt="" /></a>
+    	</div>
+        <div class="sidemodule">
+            <asp:SqlDataSource ID="DiscountsModuleSource" runat="server" ConnectionString="<%$ ConnectionStrings:KtradeConnectionString %>"
+                SelectCommand="select top 5 Comment, URL from Discounts order by CreationDate desc">
+            </asp:SqlDataSource>
+			<h3>Скидки и акции</h3>
+            <asp:Repeater ID="DiscountsModuelRepeater" runat="server" DataSourceID="DiscountsModuleSource">
+                <HeaderTemplate>
+                    <ul>
+                </HeaderTemplate>
+                <ItemTemplate>
+                    <li>
+                        <asp:HyperLink ID="HyperLink1" NavigateUrl='<%# Eval("URL") %>' Target="_blank" runat="server"><%# Eval("Comment") %></asp:HyperLink>
+                    </li>
+                </ItemTemplate>
+                <FooterTemplate>
+                    </ul>
+                </FooterTemplate>
+            </asp:Repeater>
+		</div>
+		<div class="sidemodule">
+			<h3>Горячие предложения</h3>
+			<asp:SqlDataSource ID="UpsellOffersSource" runat="server" ConnectionString="<%$ ConnectionStrings:KtradeConnectionString %>"
+				SelectCommand="
+					select top 1
+						UO.id,
+						UO.Catalogue_id,
+						C.CatalogueName,
+						UO.Article_id,
+						UO.ArticleNameDe,
+						UO.ArticleNameRu,
+						case UO.PriceOld when 0 then null else UO.PriceOld end as PriceOld,
+						UO.PriceNew as PriceNew,
+						UO.CatalogueURL as CatalogueURL,
+						UO.ImageURL as ImageURL,
+						UO.RecordDate as RecordDate,
+						'~/Images/Logos/' + C.ImageLink as LogoURL,
+						C.CatalogueName,
+						'http://ktrade.kz/Customer/NewOrder.aspx?catalogue=' + convert (nvarchar(25), UO.Catalogue_id) + '&article=' + convert(nvarchar(25), Article_id) + '&name=' + convert(nvarchar(25), ArticleNameDe) + '&price=' + replace(convert(nvarchar(25), PriceNew), '.', ',') + '&URL=' + replace (CatalogueURL, 'http://', '') as OrderURL
+					from
+						UpsellOffers as UO with (nolock)
+						join Catalogues as C with (nolock) on C.Catalogue_id = UO.Catalogue_id
+					order by
+						NEWID()">
+			</asp:SqlDataSource>
+			<asp:Repeater ID="OffersRepeater" runat="server" DataSourceID="UpsellOffersSource">
+				<ItemTemplate>
+					<div class="offer">
+						<h3><asp:HyperLink ID="ViewLink1" runat="server" NavigateUrl='<%# Eval("CatalogueURL") %>' Target="_blank"><%# Eval("ArticleNameRu")%></asp:HyperLink></h3>
+						<div>
+							<asp:HyperLink ID="ViewLink2" runat="server" NavigateUrl='<%# Eval("CatalogueURL") %>' Target="_blank"><asp:Image ID="ArticleImage" runat="server" ImageUrl='<%# Eval("ImageURL") %>' AlternateText="Photo" Title='<%# Eval("ArticleNameRu") %>' /></asp:HyperLink>
+						</div>
+						<div>
+							<asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("LogoURL") %>' AlternateText="Logo" Title='<%# Eval("CatalogueName") %>' />
+							<p><strike><%# Eval("PriceOld", "{0:#,#.00 € <br/>}") %></strike>
+							<b><%# Eval("PriceNew", "{0:#,#.00 €}") %></b></p>
+						</div>
+						<asp:HyperLink ID="ViewLink3" runat="server" NavigateUrl='<%# Eval("CatalogueURL") %>' Target="_blank">Открыть</asp:HyperLink>
+						<asp:HyperLink ID="OrderLink" runat="server" NavigateUrl='<%# Eval("OrderURL") %>'>Заказать</asp:HyperLink>
+					</div>
+				</ItemTemplate>
+			</asp:Repeater>
+			<a href="http://ktrade.kz/UpsellOffers.aspx" style="color:#5500b4">Еще&gt;&gt;&gt;</a>
+		</div>
+		<!--[if IE]>
+			<div class="sidemodule" id="NOIE">
+				<h3><del>Internet Explorer</del></h3>
+				<div>
+                    <p>Уважаемый гость, мы не рекомендуем вам пользоваться браузером Internet Explorer!</p>
+                    <p>Для более быстрого, удобного и безопасного просмотра этого и других сайтов мы рекомендуем установить один из следующих браузеров:</p>
+                </div>
+                <p><a href="http://www.google.com/chrome?hl=ru" target="_blanc"><img src="images/ChromeLogo.png" alt="Chrome" title="Chrome" /></a></p>
+                <p><a href="http://www.mozilla.org/ru/firefox" target="_blanc"><img src="images/FFlogo.png" alt="Firefox" title="Firefox" /></a></p>
+                <p><a href="http://www.opera.com/download/get.pl?id=34019&thanks=true&sub=true" target="_blanc"><img src="images/OperaLogo.png" alt="Opera" title="Opera" /></a></p>
+			</div>
+		<![endif]-->					
+    </div>
+    <div class="innercontent">
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">        
+        </asp:ContentPlaceHolder>
+        <div style="clear:both;"></div>
+    </div>	
+</asp:Content>
+
